@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: 'Evaluate datasets to ensure data quality, fairness, and safety before AI models are trained.',
 }
 
+import { AuthProvider } from '@/context/AuthContext'
+
 export default function RootLayout({
   children,
 }: {
@@ -17,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} min-h-screen animated-bg`}>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

@@ -3,7 +3,38 @@
 import Link from 'next/link';
 import { ShieldCheck, ArrowRight, Github, Code } from 'lucide-react';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+
 export default function SignupPage() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const router = useRouter();
+
+    const handleSignup = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(userCredential.user, {
+                displayName: `${firstName} ${lastName}`
+            });
+            router.push('/dashboard');
+        } catch (err: any) {
+            setError(err.message || 'Failed to create account');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
 
@@ -26,30 +57,69 @@ export default function SignupPage() {
                         <p className="text-slate-400 text-sm">Join thousands of data scientists building safer AI.</p>
                     </div>
 
-                    <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-4" onSubmit={handleSignup}>
+                        {error && (
+                            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                                {error}
+                            </div>
+                        )}
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label htmlFor="first_name" className="block text-xs font-medium text-slate-300 mb-1.5">First name</label>
-                                <input id="first_name" type="text" className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm" />
+                                <input
+                                    id="first_name"
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    required
+                                    className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm"
+                                />
                             </div>
                             <div>
                                 <label htmlFor="last_name" className="block text-xs font-medium text-slate-300 mb-1.5">Last name</label>
-                                <input id="last_name" type="text" className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm" />
+                                <input
+                                    id="last_name"
+                                    type="text"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    required
+                                    className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm"
+                                />
                             </div>
                         </div>
 
                         <div>
                             <label htmlFor="email" className="block text-xs font-medium text-slate-300 mb-1.5">Work Email</label>
-                            <input id="email" type="email" placeholder="jane@company.com" className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm" />
+                            <input
+                                id="email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="jane@company.com"
+                                required
+                                className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm"
+                            />
                         </div>
 
                         <div>
                             <label htmlFor="password" className="block text-xs font-medium text-slate-300 mb-1.5">Password</label>
-                            <input id="password" type="password" placeholder="••••••••" className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm" />
+                            <input
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="••••••••"
+                                required
+                                className="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-3 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light text-sm"
+                            />
                         </div>
 
-                        <button className="w-full group px-4 py-3 rounded-lg bg-white text-slate-900 font-semibold hover:bg-slate-200 transition-all flex items-center justify-center gap-2 mt-2">
-                            Create Account
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full group px-4 py-3 rounded-lg bg-white text-slate-900 font-semibold hover:bg-slate-200 disabled:opacity-50 transition-all flex items-center justify-center gap-2 mt-2"
+                        >
+                            {loading ? 'Creating Account...' : 'Create Account'}
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
                         <p className="text-xs text-slate-500 text-center mt-4">By signing up, you agree to our Terms of Service and Privacy Policy.</p>

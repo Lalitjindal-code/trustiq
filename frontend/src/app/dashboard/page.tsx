@@ -22,7 +22,21 @@ const RiskSphere = lazy(() => import('@/components/3d/RiskSphere').then(m => ({ 
 const FeatureNetwork = lazy(() => import('@/components/3d/FeatureNetwork').then(m => ({ default: m.FeatureNetwork })));
 const GuardianOrb = lazy(() => import('@/components/3d/GuardianOrb').then(m => ({ default: m.GuardianOrb })));
 
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+import { LogOut } from 'lucide-react';
+import { useEffect } from 'react';
+
 export default function DashboardPage() {
+    const { user, loading, logout } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!loading && !user) {
+            router.push('/login');
+        }
+    }, [user, loading, router]);
+
     const [isProcessing, setIsProcessing] = useState(false);
     const [analysisStep, setAnalysisStep] = useState(0);
     const [progressText, setProgressText] = useState('');
@@ -107,6 +121,21 @@ export default function DashboardPage() {
         handleUpload(file);
     };
 
+    const handleLogout = async () => {
+        await logout();
+        router.push('/login');
+    };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#020617] text-white">
+                <Loader2 className="w-12 h-12 animate-spin text-blue-500" />
+            </div>
+        );
+    }
+
+    if (!user) return null;
+
     return (
         <main className="min-h-screen py-16 px-4 md:px-8 relative overflow-hidden font-sans bg-[#020617] text-slate-200">
             {/* 3D Background Particles - Safe Wrapper */}
@@ -134,9 +163,19 @@ export default function DashboardPage() {
                     </div>
                     <span className="font-bold text-2xl tracking-tight text-white">Data Guardian</span>
                 </Link>
-                <Link href="/" className="text-sm font-semibold text-slate-400 hover:text-white transition-all bg-white/5 px-6 py-2.5 rounded-2xl border border-white/10 backdrop-blur-md">
-                    Exit Dashboard
-                </Link>
+                <div className="flex items-center gap-6">
+                    <div className="hidden md:flex flex-col items-end">
+                        <span className="text-xs font-black text-slate-500 uppercase tracking-widest">Active Guardian</span>
+                        <span className="text-sm font-bold text-white">{user?.displayName || user?.email}</span>
+                    </div>
+                    <button
+                        onClick={handleLogout}
+                        className="flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-all bg-white/5 px-6 py-2.5 rounded-2xl border border-white/10 backdrop-blur-md"
+                    >
+                        <LogOut className="w-4 h-4" />
+                        Log Out
+                    </button>
+                </div>
             </nav>
 
             <div className="max-w-7xl mx-auto flex flex-col items-center relative z-10">
