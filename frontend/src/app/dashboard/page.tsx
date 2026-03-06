@@ -12,13 +12,15 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { SafeCanvas } from '@/components/3d/SafeCanvas';
+import { VisualFallback } from '@/components/3d/VisualFallback';
 
 // Lazy load 3D components
 const ParticleBackground = lazy(() => import('@/components/3d/ParticleBackground').then(m => ({ default: m.ParticleBackground })));
-const GuardianOrb = lazy(() => import('@/components/3d/GuardianOrb').then(m => ({ default: m.GuardianOrb })));
+const AIBrain = lazy(() => import('@/components/3d/AIBrain').then(m => ({ default: m.AIBrain })));
 const DatasetScanner = lazy(() => import('@/components/3d/DatasetScanner').then(m => ({ default: m.DatasetScanner })));
 const RiskSphere = lazy(() => import('@/components/3d/RiskSphere').then(m => ({ default: m.RiskSphere })));
 const FeatureNetwork = lazy(() => import('@/components/3d/FeatureNetwork').then(m => ({ default: m.FeatureNetwork })));
+const GuardianOrb = lazy(() => import('@/components/3d/GuardianOrb').then(m => ({ default: m.GuardianOrb })));
 
 export default function DashboardPage() {
     const [isProcessing, setIsProcessing] = useState(false);
@@ -148,12 +150,12 @@ export default function DashboardPage() {
                     <div className="absolute left-1/2 -top-36 -translate-x-1/2 w-64 h-64 -z-10 select-none pointer-events-none overflow-hidden rounded-full">
                         <SafeCanvas
                             fallbackType="orb"
-                            camera={{ position: [0, 0, 5] }}
+                            camera={{ position: [0, 0, 5], fov: 40 }}
                             gl={{ alpha: true }}
                         >
                             <ambientLight intensity={1.5} />
                             <pointLight position={[10, 10, 10]} intensity={3} color="#3b82f6" />
-                            <GuardianOrb />
+                            <AIBrain />
                         </SafeCanvas>
                     </div>
 
@@ -319,15 +321,9 @@ export default function DashboardPage() {
                             className="flex flex-col items-center justify-center py-24 w-full max-w-3xl px-12 bg-slate-900/60 backdrop-blur-[100px] rounded-[4rem] border border-white/10 shadow-[0_0_100px_rgba(59,130,246,0.1)] mb-40"
                         >
                             <div className="w-full h-64 mb-16 relative overflow-hidden rounded-3xl">
-                                <SafeCanvas
-                                    fallbackType="scanner"
-                                    camera={{ position: [0, 0, 5] }}
-                                    gl={{ alpha: true }}
-                                >
-                                    <ambientLight intensity={2} />
-                                    <pointLight position={[10, 10, 10]} intensity={3} color="#3b82f6" />
-                                    <DatasetScanner />
-                                </SafeCanvas>
+                                <div className="p-8">
+                                    <VisualFallback type="scanner" />
+                                </div>
                             </div>
 
                             <h3 className="text-4xl font-black mb-4 text-white tracking-tighter">Secure Processing</h3>
@@ -395,16 +391,9 @@ export default function DashboardPage() {
                             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 mb-20 items-stretch px-6">
                                 <div className="md:col-span-1 rounded-[3rem] bg-slate-900/60 border border-white/10 p-8 flex flex-col items-center justify-center min-h-[250px] shadow-2xl relative overflow-hidden group">
                                     <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <SafeCanvas
-                                        fallbackType="sphere"
-                                        fallbackStatus={results.audit?.status}
-                                        camera={{ position: [0, 0, 3] }}
-                                        gl={{ alpha: true }}
-                                    >
-                                        <ambientLight intensity={1.5} />
-                                        <pointLight position={[10, 10, 10]} intensity={3} color="#3b82f6" />
-                                        <RiskSphere status={results.audit?.status} />
-                                    </SafeCanvas>
+                                    <div className="w-24 h-24 mb-4">
+                                        <VisualFallback type="sphere" status={results.audit?.status} />
+                                    </div>
                                     <span className="mt-8 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Stability Node</span>
                                 </div>
 

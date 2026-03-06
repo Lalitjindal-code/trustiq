@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { ShieldCheck, ArrowRight, Github } from 'lucide-react';
 import { SafeCanvas } from '@/components/3d/SafeCanvas';
-import { GuardianOrb } from '@/components/3d/GuardianOrb';
+import { AIBrain } from '@/components/3d/AIBrain';
 
 export default function LoginPage() {
     return (
@@ -21,8 +21,8 @@ export default function LoginPage() {
                 {/* 3D Visual Side (Hidden on mobile) */}
                 <div className="hidden lg:block w-1/2 aspect-square relative">
                     <div className="absolute inset-0 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-                    <SafeCanvas fallbackType="orb" camera={{ position: [0, 0, 5], fov: 45 }}>
-                        <GuardianOrb />
+                    <SafeCanvas fallbackType="orb" camera={{ position: [0, 0, 5], fov: 40 }}>
+                        <AIBrain />
                     </SafeCanvas>
                 </div>
 
