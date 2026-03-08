@@ -21,4 +21,5 @@ sentence-transformers
 reportlab
 pypdf
 langchain-google-genai
+langchain-huggingface
 python-dotenv
