@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException
 import pandas as pd
-from fairlearn.metrics import demographic_parity_difference, equalized_odds_difference
 import os
 
 router = APIRouter()
@@ -37,9 +36,20 @@ async def run_bias_detection():
             y_true = pd.to_numeric(df[target_col], errors='coerce').fillna(0).astype(int)
             sensitive_features = df[sensitive_col].fillna("Unknown")
             
-            # Since we don't have predictions yet, we evaluate bias in the ground truth labels
-            # This computes bias in the dataset itself, effectively looking at label assignment disparity
-            dp_diff = demographic_parity_difference(y_true, y_true, sensitive_features=sensitive_features)
+            # Manual Demographic Parity Difference calculation
+            # Since we evaluate bias in the ground truth labels
+            groups = sensitive_features.unique()
+            if len(groups) > 1:
+                probs = []
+                for group in groups:
+                    group_mask = (sensitive_features == group)
+                    if group_mask.any():
+                        prob = y_true[group_mask].mean()
+                        probs.append(prob)
+                
+                dp_diff = max(probs) - min(probs) if probs else 0.0
+            else:
+                dp_diff = 0.0
             
             # Calculate a bias score out of 100 based on the dp_diff
             # dp_diff goes from 0 to 1, where 0 is perfect parity.
@@ -54,7 +64,7 @@ async def run_bias_detection():
         return {
             "bias_score": round(score, 1),
             "demographic_parity": round(1.0 - dp_diff, 2), # 1.0 is perfect parity
-            "equal_opportunity": round(1.0 - eo_diff, 2), # Placeholder, as we don't have y_pred for true Equal Opp
+            "equal_opportunity": 1.0, # Placeholder
             "disparate_impact": round(1.0 - dp_diff, 2), # Placeholder for DI
             "issues": issues
         }
