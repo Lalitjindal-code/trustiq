@@ -1,4 +1,10 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+// Ensure the API URL is never an empty string and provide a helpful warning
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
+if (!rawApiUrl && typeof window !== 'undefined') {
+    console.warn("⚠️ NEXT_PUBLIC_API_URL is not defined in the environment. Falling back to localhost for development.");
+}
+
+export const API_BASE_URL = rawApiUrl || 'http://localhost:8000/api';
 
 export interface AuditResult {
     score: number;
