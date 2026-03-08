@@ -92,7 +92,11 @@ class RAGEngine:
         )
 
         try:
-            return self.llm.invoke(prompt)
+            res = self.llm.invoke(prompt)
+            # Gemini might return an AIMessage object instead of just string
+            if hasattr(res, 'content'):
+                return res.content
+            return str(res)
         except Exception as e:
             return f"Error generating response: {str(e)}"
 

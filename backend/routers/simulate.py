@@ -7,8 +7,9 @@ import os
 router = APIRouter()
 
 FILE_PATH = "uploads/data.csv"
-OLLAMA_API_URL = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "llama3.1:latest" # Ensure this model is pulled and running in Ollama
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+OLLAMA_API_URL = f"{OLLAMA_BASE_URL}/api/generate"
+OLLAMA_MODEL = os.getenv("LLM_MODEL", "llama3.1:latest") # Ensure this model is pulled and running in Ollama
 
 @router.post("/")
 async def run_simulation():
