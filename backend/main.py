@@ -19,6 +19,7 @@ app.include_router(ai.router, prefix="/api/ai", tags=["AI Governance"])
 app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])
 
 @app.get("/")
+@app.head("/")
 def read_root():
     return {"message": "Welcome to Intelligent Data Guardian API"}
 
