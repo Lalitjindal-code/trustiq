@@ -21,3 +21,11 @@ app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Intelligent Data Guardian API"}
+
+if __name__ == "__main__":
+    import uvicorn
+    import os
+    # Fetch the dynamic port provided by Render (or default to 8000 locally)
+    port = int(os.environ.get("PORT", 8000))
+    # Start the server listening on 0.0.0.0 directly
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
