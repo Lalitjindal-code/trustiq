@@ -59,4 +59,5 @@ async def run_bias_detection():
             "issues": issues
         }
     except Exception as e:
+        print(f"CRITICAL BIAS ERROR: {str(e)}") # Log for Render logs
         raise HTTPException(status_code=500, detail=str(e))

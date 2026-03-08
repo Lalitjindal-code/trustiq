@@ -37,7 +37,7 @@ export const api = {
         // Simulate network delay for effect
         await new Promise(resolve => setTimeout(resolve, 1500));
 
-        const response = await fetch(`${API_BASE_URL}/upload`, {
+        const response = await fetch(`${API_BASE_URL}/upload/`, {
             method: 'POST',
             body: formData,
         });
@@ -47,26 +47,26 @@ export const api = {
     runAudit: async (): Promise<AuditResult> => {
         // Simulate network delay for effect
         await new Promise(resolve => setTimeout(resolve, 2000));
-        const response = await fetch(`${API_BASE_URL}/audit`, { method: 'POST' });
+        const response = await fetch(`${API_BASE_URL}/audit/`, { method: 'POST' });
         return response.json();
     },
 
     runBiasDetection: async (): Promise<BiasResult> => {
         // Simulate network delay for effect
         await new Promise(resolve => setTimeout(resolve, 2500));
-        const response = await fetch(`${API_BASE_URL}/bias`, { method: 'POST' });
+        const response = await fetch(`${API_BASE_URL}/bias/`, { method: 'POST' });
         return response.json();
     },
 
     runSimulation: async (): Promise<SimulationResult> => {
         // Simulate network delay for effect
         await new Promise(resolve => setTimeout(resolve, 3000));
-        const response = await fetch(`${API_BASE_URL}/simulate`, { method: 'POST' });
+        const response = await fetch(`${API_BASE_URL}/simulate/`, { method: 'POST' });
         return response.json();
     },
 
     getAIExplanation: async (metrics: any) => {
-        const response = await fetch(`${API_BASE_URL}/ai/explain`, {
+        const response = await fetch(`${API_BASE_URL}/ai/explain/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ metrics }),
@@ -75,7 +75,7 @@ export const api = {
     },
 
     chatWithAI: async (message: string, dataset_context: string = "") => {
-        const response = await fetch(`${API_BASE_URL}/ai/chat`, {
+        const response = await fetch(`${API_BASE_URL}/ai/chat/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message, dataset_context }),
@@ -84,7 +84,7 @@ export const api = {
     },
 
     generateReport: async (format: string = "markdown") => {
-        const response = await fetch(`${API_BASE_URL}/ai/report?format=${format}`);
+        const response = await fetch(`${API_BASE_URL}/ai/report/?format=${format}`);
         if (format === "json") return response.json();
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -95,7 +95,7 @@ export const api = {
     },
 
     generateSyntheticSchema: async (prompt: string) => {
-        const response = await fetch(`${API_BASE_URL}/ai/generate_schema`, {
+        const response = await fetch(`${API_BASE_URL}/ai/generate_schema/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ prompt }),
