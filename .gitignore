@@ -27,6 +27,10 @@ frontend/out/
 .env.test.local
 .env.production.local
 frontend/.env*
+.venv/
+backend/.venv/
+.uv/
+frontend/.env*
 
 # OS Files
 .DS_Store
