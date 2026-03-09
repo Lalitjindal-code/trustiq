@@ -157,9 +157,9 @@ export function DashboardClient() {
 
             {/* Vibrant Background Blurs */}
             <div className="fixed inset-0 overflow-hidden -z-40 pointer-events-none">
-                <div className="absolute top-[-10%] left-[-5%] w-[60%] h-[60%] rounded-full bg-blue-600/20 blur-[130px]" />
-                <div className="absolute top-[30%] right-[-10%] w-[50%] h-[70%] rounded-full bg-purple-600/20 blur-[160px]" />
-                <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]" />
+                <div className="absolute top-[-10%] left-[-5%] w-[60%] h-[60%] rounded-full bg-blue-600/20 blur-[50px] md:blur-[130px]" />
+                <div className="absolute top-[30%] right-[-10%] w-[50%] h-[70%] rounded-full bg-purple-600/20 blur-[60px] md:blur-[160px]" />
+                <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[40px] md:blur-[120px]" />
             </div>
 
             <nav className="max-w-7xl mx-auto flex justify-between items-center mb-16 px-4 relative z-10">
@@ -193,6 +193,7 @@ export function DashboardClient() {
                     <div className="absolute left-1/2 -top-36 -translate-x-1/2 w-64 h-64 -z-10 select-none pointer-events-none overflow-hidden rounded-full">
                         <SafeCanvas
                             fallbackType="orb"
+                            disableOnMobile={true}
                             camera={{ position: [0, 0, 5], fov: 40 }}
                             gl={{ alpha: true }}
                         >

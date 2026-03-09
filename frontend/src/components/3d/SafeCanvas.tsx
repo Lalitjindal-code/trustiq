@@ -12,6 +12,7 @@ const DynamicCanvas = dynamic(() => import('@react-three/fiber').then(mod => mod
 interface SafeCanvasProps extends React.ComponentProps<typeof Canvas> {
     fallbackType: 'orb' | 'background' | 'scanner' | 'network' | 'sphere';
     fallbackStatus?: string;
+    disableOnMobile?: boolean;
     children: React.ReactNode;
 }
 
