@@ -77,7 +77,7 @@ export const AIChat = ({ datasetContext }: { datasetContext?: string }) => {
                                     <h3 className="font-bold text-sm text-white">Trustiq Assistant</h3>
                                     <div className="flex items-center gap-1.5">
                                         <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />
-                                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Local Llama 3.1</span>
+                                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Data Guardian Model</span>
                                     </div>
                                 </div>
                             </div>

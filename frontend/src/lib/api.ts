@@ -34,9 +34,6 @@ export const api = {
         const formData = new FormData();
         formData.append('file', file);
 
-        // Simulate network delay for effect
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
         const response = await fetch(`${API_BASE_URL}/upload/`, {
             method: 'POST',
             body: formData,
@@ -45,22 +42,16 @@ export const api = {
     },
 
     runAudit: async (): Promise<AuditResult> => {
-        // Simulate network delay for effect
-        await new Promise(resolve => setTimeout(resolve, 2000));
         const response = await fetch(`${API_BASE_URL}/audit/`, { method: 'POST' });
         return response.json();
     },
 
     runBiasDetection: async (): Promise<BiasResult> => {
-        // Simulate network delay for effect
-        await new Promise(resolve => setTimeout(resolve, 2500));
         const response = await fetch(`${API_BASE_URL}/bias/`, { method: 'POST' });
         return response.json();
     },
 
     runSimulation: async (): Promise<SimulationResult> => {
-        // Simulate network delay for effect
-        await new Promise(resolve => setTimeout(resolve, 3000));
         const response = await fetch(`${API_BASE_URL}/simulate/`, { method: 'POST' });
         return response.json();
     },
