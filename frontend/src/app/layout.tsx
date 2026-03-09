@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 }
 
 import { AuthProvider } from '@/context/AuthContext'
+import { MotionProvider } from '@/components/MotionProvider'
 
 export default function RootLayout({
   children,
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-screen animated-bg`}>
         <AuthProvider>
-          {children}
+          <MotionProvider>
+            {children}
+          </MotionProvider>
         </AuthProvider>
         <SpeedInsights />
       </body>

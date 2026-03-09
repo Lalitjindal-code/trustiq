@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { ShieldCheck, Activity, BrainCircuit, Lock, ArrowRight, ChevronRight, Github, Scale } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 const SafeCanvas = dynamic(() => import('@/components/3d/SafeCanvas').then(mod => mod.SafeCanvas), { ssr: false });

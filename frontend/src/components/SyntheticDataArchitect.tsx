@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { BrainCircuit, Database, Copy, CheckCircle2, AlertTriangle, Sparkles, Loader2 } from 'lucide-react';
 import { api } from '@/lib/api';
 
@@ -94,14 +94,14 @@ export function SyntheticDataArchitect() {
                     </button>
 
                     {error && (
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="flex items-start gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-200 text-sm"
                         >
                             <AlertTriangle className="w-5 h-5 shrink-0 text-red-400" />
                             <p>{error}</p>
-                        </motion.div>
+                        </m.div>
                     )}
                 </div>
 
@@ -127,16 +127,16 @@ export function SyntheticDataArchitect() {
                     <div className="flex-1 p-6 pt-16 overflow-y-auto custom-scrollbar relative">
                         <AnimatePresence mode="wait">
                             {isGenerating ? (
-                                <motion.div
+                                <m.div
                                     key="loading"
                                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                                     className="absolute inset-0 flex flex-col items-center justify-center text-slate-500 gap-4"
                                 >
                                     <div className="w-16 h-16 rounded-full border-4 border-slate-700 border-t-purple-500 animate-spin" />
                                     <p className="font-mono text-sm animate-pulse text-purple-400/80">Synthesizing data relationships...</p>
-                                </motion.div>
+                                </m.div>
                             ) : schema ? (
-                                <motion.div
+                                <m.div
                                     key="schema"
                                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                                 >
@@ -147,16 +147,16 @@ export function SyntheticDataArchitect() {
                                             </div>
                                         ))}
                                     </pre>
-                                </motion.div>
+                                </m.div>
                             ) : (
-                                <motion.div
+                                <m.div
                                     key="empty"
                                     initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                                     className="absolute inset-0 flex flex-col items-center justify-center text-slate-600 gap-4"
                                 >
                                     <Sparkles className="w-12 h-12 opacity-20" />
                                     <p className="font-medium text-sm">Your AI-generated schema will appear here.</p>
-                                </motion.div>
+                                </m.div>
                             )}
                         </AnimatePresence>
                     </div>

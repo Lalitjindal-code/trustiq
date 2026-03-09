@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis } from 'recharts';
 import { Shield, AlertTriangle, Scale, Activity, Cpu, FileText, Wrench, CheckCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 
 const MOCK_PIE_DATA = [
     { name: 'Safe', value: 85, color: '#10b981' },
@@ -33,7 +33,7 @@ export function Dashboard({ results }: { results: any }) {
         switch (activeTab) {
             case 'audit':
                 return (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div className="glass-card p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                             <Activity className="w-16 h-16 text-emerald-400 mb-4" />
                             <h3 className="text-4xl font-bold text-white mb-2">{results.audit?.score || 85}%</h3>
@@ -64,11 +64,11 @@ export function Dashboard({ results }: { results: any }) {
                                 <li className="flex items-center gap-2"><div className="w-2 h-2 bg-red-500 rounded-full" /> {results.audit?.outliers || 5} extreme statistical outliers detected in 'income' column</li>
                             </ul>
                         </div>
-                    </motion.div>
+                    </m.div>
                 );
             case 'bias':
                 return (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <div className="glass-card p-6 rounded-2xl lg:col-span-1 border-t-4 border-t-blue-500">
                             <h3 className="text-xl font-semibold mb-6 flex items-center gap-2"><Scale className="text-blue-400" /> Fairness Metrics</h3>
                             <div className="space-y-6">
@@ -101,11 +101,11 @@ export function Dashboard({ results }: { results: any }) {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </m.div>
                 );
             case 'risk':
                 return (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="glass-card p-8 rounded-2xl flex flex-col items-center justify-center text-center">
                             <div className="relative mb-6">
                                 <div className="absolute inset-0 bg-rose-500 blur-2xl rounded-full opacity-20 animate-pulse" />
@@ -136,11 +136,11 @@ export function Dashboard({ results }: { results: any }) {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </m.div>
                 );
             case 'genai':
                 return (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass-card p-8 rounded-2xl overflow-hidden relative">
+                    <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass-card p-8 rounded-2xl overflow-hidden relative">
                         <div className="absolute top-[-50%] right-[-10%] w-[60%] h-[150%] bg-purple-600/10 blur-[100px] pointer-events-none rounded-full" />
                         <div className="flex items-center gap-4 mb-8 relative z-10">
                             <div className="p-3 bg-purple-500/20 rounded-xl">
@@ -166,11 +166,11 @@ export function Dashboard({ results }: { results: any }) {
                                 </div>
                             ))}
                         </div>
-                    </motion.div>
+                    </m.div>
                 );
             case 'explain':
                 return (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass-card p-8 rounded-2xl">
+                    <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass-card p-8 rounded-2xl">
                         <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2"><FileText className="text-blue-400" /> Human-Readable Explainable AI Report</h3>
                         <div className="prose prose-invert max-w-none">
                             <div className="bg-blue-900/20 border-l-4 border-blue-500 p-6 rounded-r-xl space-y-4">
@@ -185,11 +185,11 @@ export function Dashboard({ results }: { results: any }) {
                                 </p>
                             </div>
                         </div>
-                    </motion.div>
+                    </m.div>
                 );
             case 'fix':
                 return (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass-card p-8 rounded-2xl border border-emerald-500/20">
+                    <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass-card p-8 rounded-2xl border border-emerald-500/20">
                         <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3">
                             <div className="p-2 bg-emerald-500/20 rounded-lg"><Wrench className="text-emerald-400" /></div>
                             Automated Data Fix Suggestions
@@ -215,7 +215,7 @@ export function Dashboard({ results }: { results: any }) {
                                 Apply Guardian Fixes Automatically
                             </button>
                         </div>
-                    </motion.div>
+                    </m.div>
                 );
             default:
                 return null;
@@ -239,7 +239,7 @@ export function Dashboard({ results }: { results: any }) {
                                 }`}
                         >
                             {isActive && (
-                                <motion.div
+                                <m.div
                                     layoutId="activeTabIndicator"
                                     className="absolute inset-0 bg-blue-600 rounded-full -z-10"
                                     transition={{ type: "spring", stiffness: 300, damping: 30 }}

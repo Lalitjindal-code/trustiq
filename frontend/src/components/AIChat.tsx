@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Send, X, Bot, User, Loader2, Sparkles } from 'lucide-react';
 import { api } from '@/lib/api';
 
@@ -46,7 +46,7 @@ export const AIChat = ({ datasetContext }: { datasetContext?: string }) => {
     return (
         <>
             {/* Floating Toggle Button */}
-            <motion.button
+            <m.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(true)}
@@ -57,11 +57,11 @@ export const AIChat = ({ datasetContext }: { datasetContext?: string }) => {
                     <span className="absolute top-0 right-0 w-2 h-2 bg-emerald-400 rounded-full border-2 border-blue-600" />
                 </div>
                 <span className="font-bold text-sm pr-1">Guardian AI</span>
-            </motion.button>
+            </m.button>
 
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -138,7 +138,7 @@ export const AIChat = ({ datasetContext }: { datasetContext?: string }) => {
                                 <Sparkles className="w-3 h-3 text-blue-400" /> Powered by RAG Infrastructure
                             </p>
                         </div>
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
         </>

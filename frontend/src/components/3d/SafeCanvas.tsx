@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 
-import { Canvas } from '@react-three/fiber';
+import type { Canvas } from '@react-three/fiber';
+import dynamic from 'next/dynamic';
 import { VisualFallback } from './VisualFallback';
 import { ErrorBoundary } from 'react-error-boundary';
+
+const DynamicCanvas = dynamic(() => import('@react-three/fiber').then(mod => mod.Canvas), { ssr: false });
 
 interface SafeCanvasProps extends React.ComponentProps<typeof Canvas> {
     fallbackType: 'orb' | 'background' | 'scanner' | 'network' | 'sphere';
@@ -62,7 +65,7 @@ export const SafeCanvas: React.FC<SafeCanvasProps> = ({
             onError={(error) => console.error("WebGL Error Boundary caught:", error)}
         >
             <Suspense fallback={null}>
-                <Canvas
+                <DynamicCanvas
                     {...canvasProps}
                     onCreated={(state) => {
                         // Monitor for context loss
@@ -74,7 +77,7 @@ export const SafeCanvas: React.FC<SafeCanvasProps> = ({
                     }}
                 >
                     {children}
-                </Canvas>
+                </DynamicCanvas>
             </Suspense>
         </ErrorBoundary>
     );

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Sparkles, BrainCircuit, ChevronRight, Loader2, ListChecks, ShieldAlert } from 'lucide-react';
 import { api } from '@/lib/api';
 
@@ -38,7 +38,7 @@ export const AIExplanations = ({ metrics }: { metrics: any }) => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="lg:col-span-2 glass-card p-12 rounded-[3.5rem] bg-gradient-to-br from-white/[0.03] to-blue-500/[0.02] border border-white/10 shadow-3xl relative overflow-hidden"
@@ -68,7 +68,7 @@ export const AIExplanations = ({ metrics }: { metrics: any }) => {
                             </div>
                         )}
                     </div>
-                </motion.div>
+                </m.div>
 
                 <div className="space-y-8">
                     <div className="glass-card p-10 rounded-[3rem] border border-white/10 bg-white/[0.03] shadow-2xl group hover:border-purple-500/30 transition-all">

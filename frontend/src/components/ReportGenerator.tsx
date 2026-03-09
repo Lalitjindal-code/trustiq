@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { FileText, Download, Loader2, CheckCircle2, FileJson, FileCode } from 'lucide-react';
 import { api } from '@/lib/api';
 
@@ -38,7 +38,7 @@ export const ReportGenerator = () => {
                     { format: 'json', label: 'JSON Dataset', icon: FileJson, desc: 'Machine readable governance audit.', color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
                     { format: 'pdf', label: 'PDF Audit (Coming)', icon: FileText, desc: 'Professional PDF report for teams.', color: 'text-rose-400', bg: 'bg-rose-500/10', disabled: true }
                 ].map((item) => (
-                    <motion.div
+                    <m.div
                         key={item.format}
                         whileHover={item.disabled ? {} : { y: -8 }}
                         className={`glass-card p-10 rounded-[3rem] border border-white/10 ${item.bg} flex flex-col hover:border-white/20 transition-all ${item.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
@@ -71,7 +71,7 @@ export const ReportGenerator = () => {
                                 </>
                             )}
                         </button>
-                    </motion.div>
+                    </m.div>
                 ))}
             </div>
         </div>

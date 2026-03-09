@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { UploadCloud, File, CheckCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 
 interface UploaderProps {
     onUpload: (file: File) => void;
@@ -48,7 +48,7 @@ export function Uploader({ onUpload }: UploaderProps) {
     };
 
     return (
-        <motion.div
+        <m.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -88,26 +88,26 @@ export function Uploader({ onUpload }: UploaderProps) {
 
                         <AnimatePresence mode="wait">
                             {!file ? (
-                                <motion.div
+                                <m.div
                                     key="upload"
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     className="flex flex-col items-center justify-center pt-5 pb-6 pointer-events-none"
                                 >
-                                    <motion.div
+                                    <m.div
                                         animate={{ y: [0, -10, 0] }}
                                         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                                     >
                                         <UploadCloud className="w-16 h-16 text-blue-400 mb-4 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-                                    </motion.div>
+                                    </m.div>
                                     <p className="mb-2 text-lg text-slate-300">
                                         <span className="font-semibold text-blue-400">Click to upload</span> or drag and drop
                                     </p>
                                     <p className="text-sm text-slate-500">CSV, JSON (MAX. 50MB)</p>
-                                </motion.div>
+                                </m.div>
                             ) : (
-                                <motion.div
+                                <m.div
                                     key="file"
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
@@ -117,7 +117,7 @@ export function Uploader({ onUpload }: UploaderProps) {
                                     <CheckCircle className="w-16 h-16 text-emerald-400 mb-4 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
                                     <p className="text-lg font-medium text-slate-200 mb-1">{file.name}</p>
                                     <p className="text-sm text-slate-500">{(file.size / (1024 * 1024)).toFixed(2)} MB</p>
-                                </motion.div>
+                                </m.div>
                             )}
                         </AnimatePresence>
                     </label>
@@ -125,7 +125,7 @@ export function Uploader({ onUpload }: UploaderProps) {
 
                 <AnimatePresence>
                     {file && (
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, height: 0, marginTop: 0 }}
                             animate={{ opacity: 1, height: 'auto', marginTop: 32 }}
                             exit={{ opacity: 0, height: 0, marginTop: 0 }}
@@ -136,17 +136,17 @@ export function Uploader({ onUpload }: UploaderProps) {
                                 className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-500 hover:to-purple-500 shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center space-x-2"
                             >
                                 <span>Initialize Guardian Protocol</span>
-                                <motion.span
+                                <m.span
                                     animate={{ x: [0, 5, 0] }}
                                     transition={{ repeat: Infinity, duration: 1.5 }}
                                 >
                                     →
-                                </motion.span>
+                                </m.span>
                             </button>
-                        </motion.div>
+                        </m.div>
                     )}
                 </AnimatePresence>
             </div>
-        </motion.div>
+        </m.div>
     );
 }
