@@ -15,16 +15,17 @@ import {
     Info, Clock, Code, ListChecks, Check, UploadCloud, XCircle
 } from 'lucide-react';
 import Link from 'next/link';
-import { SafeCanvas } from '@/components/3d/SafeCanvas';
+import dynamic from 'next/dynamic';
 import { VisualFallback } from '@/components/3d/VisualFallback';
 
-// Lazy load 3D components
-const ParticleBackground = lazy(() => import('@/components/3d/ParticleBackground').then(m => ({ default: m.ParticleBackground })));
-const AIBrain = lazy(() => import('@/components/3d/AIBrain').then(m => ({ default: m.AIBrain })));
-const DatasetScanner = lazy(() => import('@/components/3d/DatasetScanner').then(m => ({ default: m.DatasetScanner })));
-const RiskSphere = lazy(() => import('@/components/3d/RiskSphere').then(m => ({ default: m.RiskSphere })));
-const FeatureNetwork = lazy(() => import('@/components/3d/FeatureNetwork').then(m => ({ default: m.FeatureNetwork })));
-const GuardianOrb = lazy(() => import('@/components/3d/GuardianOrb').then(m => ({ default: m.GuardianOrb })));
+// Lazy load 3D components with next/dynamic
+const SafeCanvas = dynamic(() => import('@/components/3d/SafeCanvas').then(mod => mod.SafeCanvas), { ssr: false });
+const ParticleBackground = dynamic(() => import('@/components/3d/ParticleBackground').then(mod => mod.ParticleBackground), { ssr: false });
+const AIBrain = dynamic(() => import('@/components/3d/AIBrain').then(mod => mod.AIBrain), { ssr: false });
+const DatasetScanner = dynamic(() => import('@/components/3d/DatasetScanner').then(mod => mod.DatasetScanner), { ssr: false });
+const RiskSphere = dynamic(() => import('@/components/3d/RiskSphere').then(mod => mod.RiskSphere), { ssr: false });
+const FeatureNetwork = dynamic(() => import('@/components/3d/FeatureNetwork').then(mod => mod.FeatureNetwork), { ssr: false });
+const GuardianOrb = dynamic(() => import('@/components/3d/GuardianOrb').then(mod => mod.GuardianOrb), { ssr: false });
 
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -208,10 +209,10 @@ export default function DashboardPage() {
                             <ShieldCheck className="w-14 h-14 text-blue-400" />
                         </div>
                     </div>
-                    <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-none text-white">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-6 sm:mb-8 leading-none text-white px-2">
                         Intelligent <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 drop-shadow-sm">Analysis</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed">
+                    <p className="text-lg sm:text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed px-4">
                         Data security meets AI intelligence. Securely audit, detect bias, and simulate risks in seconds.
                     </p>
                 </motion.header>
@@ -226,7 +227,7 @@ export default function DashboardPage() {
                             className="w-full flex flex-col items-center"
                         >
                             {/* Mode Toggle */}
-                            <div className="flex bg-slate-900/80 p-1.5 rounded-full mb-16 border border-white/10 shadow-xl shadow-blue-500/5">
+                            <div className="flex flex-col sm:flex-row bg-slate-900/80 p-1.5 rounded-2xl sm:rounded-full mb-12 sm:mb-16 border border-white/10 shadow-xl shadow-blue-500/5 gap-2 sm:gap-0">
                                 <button
                                     onClick={() => setMode('analyze')}
                                     className={`px-8 py-3 rounded-full text-sm font-bold flex items-center gap-2 transition-all ${mode === 'analyze' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-slate-400 hover:text-white'}`}
@@ -351,8 +352,8 @@ export default function DashboardPage() {
                                             </SafeCanvas>
                                         </div>
 
-                                        <h2 className="text-4xl font-black mb-16 text-white tracking-tighter">Enterprise Quality Layer</h2>
-                                        <div className="grid grid-cols-2 lg:grid-cols-6 gap-6 text-left">
+                                        <h2 className="text-3xl sm:text-4xl font-black mb-12 sm:mb-16 text-white tracking-tighter">Enterprise Quality Layer</h2>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 text-left">
                                             {[
                                                 { img: Activity, title: 'Compliance', desc: 'Auto-detect policy breaches.' },
                                                 { img: Scale, title: 'Inclusion', desc: 'Identify marginalized bias.' },
@@ -437,8 +438,8 @@ export default function DashboardPage() {
                         >
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-20 max-w-7xl mx-auto px-6">
                                 <div>
-                                    <div className="flex flex-wrap items-center gap-6 mb-6">
-                                        <h2 className="text-5xl font-black text-white tracking-tightest">Guardian Report</h2>
+                                    <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-4 sm:mb-6">
+                                        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tightest">Guardian Report</h2>
                                         {results.audit?.status === 'Low Risk' && <span className="px-6 py-2 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-[0.2em] shadow-lg shadow-emerald-500/10">Safe Protocol</span>}
                                         {results.audit?.status === 'Medium Risk' && <span className="px-6 py-2 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-[0.2em] shadow-lg shadow-amber-500/10">Elevated Priority</span>}
                                         {results.audit?.status === 'High Risk' && <span className="px-6 py-2 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-[0.2em] shadow-lg shadow-red-500/10">Risk Detected</span>}
@@ -450,7 +451,7 @@ export default function DashboardPage() {
 
                                 <button
                                     onClick={() => setResults(null)}
-                                    className="px-10 py-4 rounded-2xl bg-white text-slate-950 font-black text-sm hover:translate-y-[-4px] hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] transition-all flex items-center gap-3"
+                                    className="w-full md:w-auto px-6 py-3 sm:px-10 sm:py-4 rounded-xl sm:rounded-2xl bg-white text-slate-950 font-black text-sm hover:translate-y-[-4px] hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] transition-all flex items-center justify-center gap-3"
                                 >
                                     <UploadCloud className="w-5 h-5" /> Analyze New
                                 </button>

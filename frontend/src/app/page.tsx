@@ -43,7 +43,7 @@ export default function LandingPage() {
             </div>
             <div className="flex items-center space-x-4">
               <Link href="/login" className="text-slate-300 hover:text-white transition-colors text-sm font-medium hidden sm:block">Log In</Link>
-              <Link href="/signup" className="px-5 py-2.5 rounded-full bg-white text-slate-900 font-semibold text-sm hover:bg-slate-200 transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+              <Link href="/signup" className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white text-slate-900 font-semibold text-sm hover:bg-slate-200 transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
                 Get Started
               </Link>
             </div>
@@ -54,31 +54,31 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[90vh] flex flex-col justify-center">
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-sm font-medium mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs sm:text-sm font-medium mb-6 sm:mb-8">
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
             Introducing the Future of Trustworthy AI
           </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 sm:mb-8 leading-tight">
             Build AI that is <br className="hidden md:block" />
             <span className="gradient-text">Safe, Fair, & Reliable.</span>
           </h1>
-          <p className="mt-6 text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="mt-4 sm:mt-6 text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light px-2">
             An automated safety layer for GenAI pipelines. Prevent biased decisions, detect data anomalies, and simulate edge cases before your models hit production.
           </p>
-          <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/signup" className="group px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-500 hover:to-purple-500 shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all flex items-center gap-2 hover:scale-105 active:scale-95 text-lg">
+          <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/signup" className="w-full sm:w-auto justify-center group px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-500 hover:to-purple-500 shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all flex items-center gap-2 hover:scale-105 active:scale-95 text-base sm:text-lg">
               Start Free Trial
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link href="/dashboard" className="px-8 py-4 rounded-full glass-card text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-lg font-medium">
+            <Link href="/dashboard" className="w-full sm:w-auto justify-center px-6 sm:px-8 py-3 sm:py-4 rounded-full glass-card text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-base sm:text-lg font-medium">
               View Demo Dashboard
             </Link>
           </div>
         </div>
 
         {/* Dashboard 3D Mockup Graphic */}
-        <div className="mt-20 max-w-5xl mx-auto relative perspective-1000 px-4">
-          <div className="w-full aspect-[2/1] bg-slate-900/60 rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform rotate-x-6 backdrop-blur-xl relative overflow-hidden flex flex-col group hover:rotate-x-0 transition-transform duration-700">
+        <div className="mt-16 sm:mt-20 max-w-5xl mx-auto relative perspective-1000 px-2 sm:px-4">
+          <div className="w-full aspect-video md:aspect-[2/1] bg-slate-900/60 rounded-xl sm:rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform rotate-x-6 backdrop-blur-xl relative overflow-hidden flex flex-col group hover:rotate-x-0 transition-transform duration-700">
             <div className="h-10 border-b border-white/10 flex justify-between items-center px-4 bg-slate-900/80 shrink-0">
               <div className="flex gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-400/60"></div>
