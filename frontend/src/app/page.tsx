@@ -2,10 +2,13 @@
 import Link from 'next/link';
 import { ShieldCheck, Activity, BrainCircuit, Lock, ArrowRight, ChevronRight, Github, Scale } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { SafeCanvas } from '@/components/3d/SafeCanvas';
-import { DatasetScanner } from '@/components/3d/DatasetScanner';
-import { FeatureNetwork } from '@/components/3d/FeatureNetwork';
-import { ParticleBackground } from '@/components/3d/ParticleBackground';
+import dynamic from 'next/dynamic';
+
+const SafeCanvas = dynamic(() => import('@/components/3d/SafeCanvas').then(mod => mod.SafeCanvas), { ssr: false });
+const DatasetScanner = dynamic(() => import('@/components/3d/DatasetScanner').then(mod => mod.DatasetScanner), { ssr: false });
+const FeatureNetwork = dynamic(() => import('@/components/3d/FeatureNetwork').then(mod => mod.FeatureNetwork), { ssr: false });
+const ParticleBackground = dynamic(() => import('@/components/3d/ParticleBackground').then(mod => mod.ParticleBackground), { ssr: false });
+
 
 export default function LandingPage() {
   return (
