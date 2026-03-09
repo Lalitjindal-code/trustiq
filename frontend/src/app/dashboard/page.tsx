@@ -184,11 +184,9 @@ export default function DashboardPage() {
             </nav>
 
             <div className="max-w-7xl mx-auto flex flex-col items-center relative z-10">
-                <m.header
-                    initial={{ y: -50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-24 relative"
+                <header
+                    className="text-center mb-24 relative animate-fade-in-up"
+                    style={{ animationDuration: '0.8s' }}
                 >
                     {/* Hero Section 3D AI Guardian Model - Safe Wrapper */}
                     <div className="absolute left-1/2 -top-36 -translate-x-1/2 w-64 h-64 -z-10 select-none pointer-events-none overflow-hidden rounded-full">
@@ -214,16 +212,17 @@ export default function DashboardPage() {
                     <p className="text-lg sm:text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed px-4">
                         Data security meets AI intelligence. Securely audit, detect bias, and simulate risks in seconds.
                     </p>
-                </m.header>
+                </header>
 
                 <AnimatePresence mode="wait">
                     {!isProcessing && !results && (
                         <m.div
                             key="mode-selector"
-                            initial={{ opacity: 0, scale: 0.98 }}
+                            initial={false}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
-                            className="w-full flex flex-col items-center"
+                            className="w-full flex flex-col items-center animate-fade-in-up"
+                            style={{ animationDuration: '0.8s', animationFillMode: 'both' }}
                         >
                             {/* Mode Toggle */}
                             <div className="flex flex-col sm:flex-row bg-slate-900/80 p-1.5 rounded-2xl sm:rounded-full mb-12 sm:mb-16 border border-white/10 shadow-xl shadow-blue-500/5 gap-2 sm:gap-0">
