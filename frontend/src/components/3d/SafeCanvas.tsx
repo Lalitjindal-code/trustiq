@@ -23,8 +23,14 @@ export const SafeCanvas: React.FC<SafeCanvasProps> = ({
     ...canvasProps
 }) => {
     const [webGLAvailable, setWebGLAvailable] = useState<boolean | null>(null);
+    const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
     useEffect(() => {
+        // Only run Heavy 3D on desktop
+        setIsMobile(window.innerWidth < 768);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+
         try {
             const canvas = document.createElement('canvas');
             const support = !!(
@@ -38,12 +44,15 @@ export const SafeCanvas: React.FC<SafeCanvasProps> = ({
         } catch (e) {
             setWebGLAvailable(false);
         }
+
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     // While checking, show nothing or a static placeholder
-    if (webGLAvailable === null) return null;
+    if (webGLAvailable === null || isMobile === null) return null;
 
-    if (!webGLAvailable) {
+    // Fallback on mobile or if WebGL is unavailable
+    if (!webGLAvailable || isMobile) {
         return <VisualFallback type={fallbackType} status={fallbackStatus} />;
     }
 
