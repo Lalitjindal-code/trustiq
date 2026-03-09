@@ -1,22 +1,25 @@
 'use client';
 
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Uploader } from '@/components/Uploader';
-import { Dashboard } from '@/components/Dashboard';
-import { AIExplanations } from '@/components/AIExplanations';
-import { AIChat } from '@/components/AIChat';
-import { ReportGenerator } from '@/components/ReportGenerator';
-import { SyntheticDataArchitect } from '@/components/SyntheticDataArchitect';
 import { api, type AuditResult, type BiasResult, type SimulationResult } from '@/lib/api';
 import {
     ShieldCheck, Loader2, Database, Activity, Scale,
     BrainCircuit, CheckCircle, AlertTriangle, FileText, ChevronRight,
-    Info, Clock, Code, ListChecks, Check, UploadCloud, XCircle
+    Info, Clock, Code, ListChecks, Check, UploadCloud, XCircle, LogOut
 } from 'lucide-react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { VisualFallback } from '@/components/3d/VisualFallback';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+
+const Uploader = dynamic(() => import('@/components/Uploader').then(mod => mod.Uploader), { ssr: false });
+const Dashboard = dynamic(() => import('@/components/Dashboard').then(mod => mod.Dashboard), { ssr: false });
+const AIExplanations = dynamic(() => import('@/components/AIExplanations').then(mod => mod.AIExplanations), { ssr: false });
+const AIChat = dynamic(() => import('@/components/AIChat').then(mod => mod.AIChat), { ssr: false });
+const ReportGenerator = dynamic(() => import('@/components/ReportGenerator').then(mod => mod.ReportGenerator), { ssr: false });
+const SyntheticDataArchitect = dynamic(() => import('@/components/SyntheticDataArchitect').then(mod => mod.SyntheticDataArchitect), { ssr: false });
 
 // Lazy load 3D components with next/dynamic
 const SafeCanvas = dynamic(() => import('@/components/3d/SafeCanvas').then(mod => mod.SafeCanvas), { ssr: false });
@@ -27,10 +30,6 @@ const RiskSphere = dynamic(() => import('@/components/3d/RiskSphere').then(mod =
 const FeatureNetwork = dynamic(() => import('@/components/3d/FeatureNetwork').then(mod => mod.FeatureNetwork), { ssr: false });
 const GuardianOrb = dynamic(() => import('@/components/3d/GuardianOrb').then(mod => mod.GuardianOrb), { ssr: false });
 
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
-import { LogOut } from 'lucide-react';
-import { useEffect } from 'react';
 
 export default function DashboardPage() {
     const { user, loading, logout } = useAuth();
