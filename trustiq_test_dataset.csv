@@ -1,9 +1,9 @@
 id,age,gender,income,credit_score,loan_approved
-1,25,Male,45000,720,1
-2,,Female,42000,680,0
-3,34,Non-Binary,55000,710,1
-4,45,Male,60000,750,1
-5,29,Female,38000,640,0
+1,25,Male,450000,720,1
+2,,Female,220000,680,0
+3,34,Non-Binary,550,710,1
+4,45,Male,600000,750,1
+5,29,Female,30,640,0
 6,52,Male,1200000,800,1
 7,31,Female,41000,,0
 8,22,Male,35000,690,1
@@ -14,7 +14,7 @@ id,age,gender,income,credit_score,loan_approved
 13,44,Female,39500,660,0
 14,21,Male,32000,670,1
 15,36,Female,46000,715,0
-16,50,Male,54000,740,1
+16,50,Male,,740,1
 17,28,Female,37500,635,0
 18,34,Male,44500,705,1
 19,,Female,42500,685,0

@@ -31,7 +31,7 @@ const FeatureNetwork = dynamic(() => import('@/components/3d/FeatureNetwork').th
 const GuardianOrb = dynamic(() => import('@/components/3d/GuardianOrb').then(mod => mod.GuardianOrb), { ssr: false });
 
 
-export default function DashboardPage() {
+export function DashboardClient() {
     const { user, loading, logout } = useAuth();
     const router = useRouter();
 
